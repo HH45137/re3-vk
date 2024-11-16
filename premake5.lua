@@ -2,8 +2,7 @@ newoption {
 	trigger     = "glfwdir64",
 	value       = "PATH",
 	description = "Directory of glfw",
-	-- default     = "vendor/glfw-3.3.2.bin.WIN64",
-	default     = "thirdpart/glfw/",
+	default     = "vendor/glfw-3.3.2.bin.WIN64",
 }
 
 newoption {
