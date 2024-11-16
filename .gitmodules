@@ -14,3 +14,7 @@
 	path = vendor/librw
 	url = https://github.com/aap/librw.git
 	branch = master
+[submodule "thirdpart/glfw"]
+	path = thirdpart/glfw
+	url = https://github.com/glfw/glfw.git
+	branch = master
