@@ -1206,11 +1206,11 @@ void InitialiseLanguage()
 #else
 	WORD primUserLCID	= PRIMARYLANGID(GetSystemDefaultLCID());
 	WORD primSystemLCID = PRIMARYLANGID(GetUserDefaultLCID());
-	WORD primLayout		= PRIMARYLANGID((DWORD)GetKeyboardLayout(0));
+	WORD primLayout		= PRIMARYLANGID(reinterpret_cast<long long>(GetKeyboardLayout(0)));
 	
 	WORD subUserLCID	= SUBLANGID(GetSystemDefaultLCID());
 	WORD subSystemLCID	= SUBLANGID(GetUserDefaultLCID());
-	WORD subLayout		= SUBLANGID((DWORD)GetKeyboardLayout(0));
+	WORD subLayout		= SUBLANGID(reinterpret_cast<long long>(GetKeyboardLayout(0)));
 #endif
 	if (   primUserLCID	  == LANG_GERMAN
 		|| primSystemLCID == LANG_GERMAN

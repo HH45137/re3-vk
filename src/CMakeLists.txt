@@ -17,12 +17,14 @@ endfunction()
 
 header_directories(${PROJECT}_INCLUDES)
 
-configure_file("${CMAKE_CURRENT_SOURCE_DIR}/extras/GitSHA1.cpp.in" "${CMAKE_CURRENT_BINARY_DIR}/extras/GitSHA1.cpp" @ONLY)
-list(APPEND ${PROJECT}_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/extras/GitSHA1.cpp")
+#configure_file("${CMAKE_CURRENT_SOURCE_DIR}/extras/GitSHA1.cpp.in" "${CMAKE_CURRENT_BINARY_DIR}/extras/GitSHA1.cpp" @ONLY)
+#list(APPEND ${PROJECT}_SOURCES "${CMAKE_CURRENT_BINARY_DIR}/extras/GitSHA1.cpp")
 
 add_executable(${EXECUTABLE} WIN32
     ${${PROJECT}_SOURCES}
 )
+
+set_target_properties(${EXECUTABLE} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../bin/GTA3/)
 
 target_link_libraries(${EXECUTABLE} PRIVATE
     librw::librw
@@ -53,7 +55,7 @@ target_compile_definitions(${EXECUTABLE} PRIVATE CMAKE_BUILD)
 target_compile_definitions(${EXECUTABLE} PRIVATE USE_OUR_VERSIONING)
 
 if(${PROJECT}_AUDIO STREQUAL "OAL")
-    find_package(OpenAL REQUIRED)
+    find_package(OpenAL CONFIG REQUIRED)
     if(TARGET OpenAL::OpenAL)
         target_link_libraries(${EXECUTABLE} PRIVATE OpenAL::OpenAL)
     else()
@@ -68,9 +70,11 @@ elseif(${PROJECT}_AUDIO STREQUAL "MSS")
     target_link_libraries(${EXECUTABLE} PRIVATE MilesSDK::MilesSDK)
 endif()
 
-find_package(mpg123 REQUIRED)
+find_package(mpg123 CONFIG REQUIRED)
 target_link_libraries(${EXECUTABLE} PRIVATE
     MPG123::libmpg123
+    winmm
+    ${CMAKE_CURRENT_SOURCE_DIR}/../vendor/mpg123/lib/Win64/libmpg123-0.lib
 )
 if(${PROJECT}_WITH_OPUS)
     find_package(opusfile REQUIRED)

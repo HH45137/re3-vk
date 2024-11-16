@@ -3,6 +3,9 @@ cmake_minimum_required(VERSION 3.14)
 set(EXECUTABLE re3)
 set(PROJECT RE3)
 
+set(CMAKE_EXE_LINKER_FLAGS "-static")
+set(CMAKE_SHARED_LINKER_FLAGS "-static")
+
 project(${EXECUTABLE} C CXX)
 set(${PROJECT}_AUTHOR "${PROJECT} Team")
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
